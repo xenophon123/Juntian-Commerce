@@ -1,7 +1,3 @@
-// const config = require('config');
-const diaries = require('articleData/article');
-const config = require('config');
-
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -52,52 +48,5 @@ App({
   },
   globalData: {
     hasLogin: false,
-  },
-
-getDiaryList(cb) {
-    var that = this;
-
-    if (this.globalData.diaryList) {
-      typeof cb == 'function' && cb(this.globalData.diaryList);
-    } else {
-      let list = [];
-
-      this.getLocalDiaries(storage => {
-        // 本地缓存数据
-        for (var k in storage) {
-          list.push(storage[k]);
-        }
-      });
-
-      // 本地假数据
-      list.push(...diaries.diaries);
-      that.globalData.diaryList = list;
-      typeof cb == 'function' && cb(that.globalData.diaryList)
-    }
-  },
-
-  // 获取本地日记缓存
-  getLocalDiaries(cb) {
-    var that = this;
-
-    if (this.globalData.localDiaries) {
-      typeof cb == 'function' && cb(this.globalData.localDiaries);
-    } else {
-      wx.getStorage({
-        key: config.storage.diaryListKey,
-        success: (res) => {
-          that.globalData.localDiaries = res.data;
-          typeof cb == 'function' && cb(that.globalData.localDiaries);
-        },
-        fail: (error) => {
-          that.globalData.localDiaries = {};
-          typeof cb == 'function' && cb(that.globalData.localDiaries);
-        }
-      });
-    }
-  },
-
-
-
-
+  }
 })

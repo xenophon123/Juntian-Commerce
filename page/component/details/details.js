@@ -4,7 +4,7 @@ var fileData = require('../../../data.storage.js')
 Page({
   data:{
     //goods stored at local goods json
-    goods: fileData.goodsData().list[3],
+    goods: fileData.goodsData()[3],
     num: 1,
     totalNum: 0,
     hasCarts: false,
